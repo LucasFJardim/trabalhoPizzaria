@@ -52,14 +52,44 @@ void listarPizzas(Pizza *pizzas, int quantidadePizzas) {
     }
 }
 
+Pizza criarPizza(int quantidadePizzas) {
+    Pizza novaPizza;
+    novaPizza.id = quantidadePizzas + 1;
+
+    printf("Digite o nome da nova pizza: ");
+    scanf(" %[^\n]", novaPizza.nome);
+
+    printf("Digite o tamanho da pizza (P, M, G): ");
+    scanf(" %c", &novaPizza.tamanho);
+
+    printf("Digite o preco da pizza: ");
+    scanf("%f", &novaPizza.preco);
+
+    printf("Digite a quantidade de ingredientes (max %d): ", MAX_INGREDIENTES);
+    scanf("%d", &novaPizza.quantidadeIngredientes);
+
+    for (int i = 0; i < novaPizza.quantidadeIngredientes; i++) {
+        printf("Digite o nome do ingrediente %d: ", i + 1);
+        scanf(" %[^\n]", novaPizza.ingredientes[i].nome);
+
+        printf("Digite o preco do ingrediente %d: ", i + 1);
+        scanf("%f", &novaPizza.ingredientes[i].preco);
+    }
+
+    printf("Pizza '%s' Criada!!\n", novaPizza.nome);
+    return novaPizza;
+}
+
+
 void realizarCompra(Pizza *pizzas, int quantidadePizzas, Ingrediente *ingredientes, int quantidadeIngredientes) {
-    int escolhaPizza, tamanhoEscolha, ingredientesExtras[10], quantidadeExtras = 0;
+    int escolhaPizza, ingredientesExtras[10], quantidadeExtras = 0;
+    char tamanhoEscolha;
     char opcaoIngrediente;
 
     printf("Escolha uma pizza para comprar (1 a %d): \n", quantidadePizzas);
-    printf("1- Calabrasa\n");
-    printf("2- Margherita\n");
-    printf("3- Frango com Catupiry\n");
+    for(int i = 0; i < quantidadePizzas; i++){
+        printf("%d- %s\n", pizzas[i].id, pizzas[i].nome);
+    }
 
     scanf("%d", &escolhaPizza);
 
@@ -84,7 +114,7 @@ void realizarCompra(Pizza *pizzas, int quantidadePizzas, Ingrediente *ingredient
 
     printf("Escolha ingredientes extras (separados por espacos):\n");
     printf("1. Queijo\n2. Cebola\n3. Catupiry\n4. Azeitona\n");
-    printf("Digite os números dos ingredientes extras, e 0 para finalizar: ");
+    printf("Digite os numeros dos ingredientes extras, e 0 para finalizar: ");
     while (1) {
         scanf("%d", &ingredientesExtras[quantidadeExtras]);
         if (ingredientesExtras[quantidadeExtras] == 0) break;
@@ -99,3 +129,41 @@ void realizarCompra(Pizza *pizzas, int quantidadePizzas, Ingrediente *ingredient
 
     printf("Preco final: %.2f\n", pizzaEscolhida.preco);
 }
+
+void removerPizza(Pizza *pizzas, int *quantidadePizzas) {
+    if (*quantidadePizzas == 0) {
+        printf("Não há pizzas para remover.\n");
+        return;
+    }
+
+    int id;
+    printf("Digite o ID da pizza que deseja remover: ");
+    scanf("%d", &id);
+
+    int indiceRemover = -1;
+
+    for (int i = 0; i < *quantidadePizzas; i++) {
+        if (pizzas[i].id == id) {
+            indiceRemover = i;
+            break;
+        }
+    }
+
+    if (indiceRemover == -1) {
+        printf("ID %d Invalido!!\n", id);
+        return;
+    }
+
+    for (int i = indiceRemover; i < *quantidadePizzas - 1; i++) {
+        pizzas[i] = pizzas[i + 1];
+    }
+
+    (*quantidadePizzas)--;
+
+    for (int i = 0; i < *quantidadePizzas; i++) {
+        pizzas[i].id = i + 1;
+    }
+
+    printf("Pizza removida com sucesso.\n");
+}
+

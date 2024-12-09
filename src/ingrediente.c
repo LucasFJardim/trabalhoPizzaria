@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <string.h>
 #include "ingrediente.h"
 
 void inicializarIngredientes(Ingrediente *ingredientes, int *quantidadeIngredientes) {

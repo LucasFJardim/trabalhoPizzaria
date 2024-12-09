@@ -2,6 +2,7 @@
 #define INGREDIENTE_H
 
 #define MAX_INGREDIENTES 4
+#define MAX_INGREDIENTES_INGREDIENTE 4
 #define MAX_NOME_INGREDIENTE 50
 
 typedef struct {

@@ -20,4 +20,5 @@ $(SRC_DIR)/%.o: $(SRC_DIR)/%.c $(HEADERS)
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
-	rm -f src/*.o pizzaria
+	if exist src\*.o del /q src\*.o
+	if exist pizzaria del /q pizzaria
