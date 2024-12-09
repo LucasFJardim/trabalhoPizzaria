@@ -81,7 +81,7 @@ Pizza criarPizza(int quantidadePizzas) {
 }
 
 
-void realizarCompra(Pizza *pizzas, int quantidadePizzas, Ingrediente *ingredientes, int quantidadeIngredientes) {
+void realizarCompra(Pizza *pizzas, int quantidadePizzas, Ingrediente *ingredientes, int quantidadeIngredientes, int aux) {
     int escolhaPizza, ingredientesExtras[10], quantidadeExtras = 0;
     char tamanhoEscolha;
     char opcaoIngrediente;
@@ -113,7 +113,9 @@ void realizarCompra(Pizza *pizzas, int quantidadePizzas, Ingrediente *ingredient
     }
 
     printf("Escolha ingredientes extras (separados por espacos):\n");
-    printf("1. Queijo\n2. Cebola\n3. Catupiry\n4. Azeitona\n");
+    for(int i = 0; i < aux; i++){
+        printf("%d- %s\n", ingredientes[i].id, ingredientes[i].nome);
+    }
     printf("Digite os numeros dos ingredientes extras, e 0 para finalizar: ");
     while (1) {
         scanf("%d", &ingredientesExtras[quantidadeExtras]);

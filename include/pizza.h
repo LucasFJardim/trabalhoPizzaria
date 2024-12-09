@@ -20,7 +20,7 @@ typedef struct {
 void inicializarPizzas(Pizza *pizzas, int *quantidadePizzas);
 void listarPizzas(Pizza *pizzas, int quantidadePizzas);
 Pizza criarPizza(int quantidadePizzas);
-void realizarCompra(Pizza *pizzas, int quantidadePizzas, Ingrediente *ingredientes, int quantidadeIngredientes);
+void realizarCompra(Pizza *pizzas, int quantidadePizzas, Ingrediente *ingredientes, int quantidadeIngredientes, int aux);
 void removerPizza(Pizza *pizzas, int *quantidadePizzas);
 
 #endif
